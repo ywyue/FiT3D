@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="FiT3D" />
+    <meta name="keywords" content="FiT3D, Improving 2D Feature Representations by 3D-Aware Fine-Tuning, 3D-Aware Fine-Tuning" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      Improving 2D Feature Representations by 3D-Aware Fine-Tuning
+    </title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+
+      gtag("js", new Date());
+
+      gtag("config", "G-PYVRSFMDRL");
+    </script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./static/css/bulma.min.css" />
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css" />
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css" />
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"
+    />
+    <link rel="stylesheet" href="./static/css/index.css" />
+    <!-- <link rel="icon" href="./static/images/favicon.svg" /> -->
+    <link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <!-- <script src="./static/js/index.js"></script> -->
+    <script src="./static/js/lazy.js"></script>
+    <script src="./static/js/faster.js"></script>
+    <script src="./static/js/index.js"></script>
+  </head>
+  <body>
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column has-text-centered">
+              <h1 class="title is-2 publication-title">
+                Improving 2D Feature Representations by <br> 3D-Aware Fine-Tuning
+              </h1>
+              <div class="is-size-5 publication-authors">
+                <span class="author-block">
+                  <a href="https://n.ethz.ch/~yuayue/">Yuanwen Yue</a
+                  ><sup>1</sup>,</span
+                >
+                <span class="author-block">
+                  <a href="https://www.mpi-inf.mpg.de/departments/computer-vision-and-machine-learning/people/anurag-das/">Anurag Das</a
+                  ><sup>2</sup>,</span
+                >
+                <span class="author-block">
+                  <a href="https://francisengelmann.github.io/"
+                    >Francis Engelmann</a
+                  ><sup>1,3</sup>,
+                </span>
+                <br>
+                <span class="author-block">
+                  <a href="https://vlg.inf.ethz.ch/team/Prof-Dr-Siyu-Tang.html">Siyu Tang</a
+                  ><sup>1</sup>,</span
+                >
+                <span class="author-block">
+                  <a
+                    href="https://geometric-rl.mpi-inf.mpg.de/people/lenssen.html"
+                    >Jan Eric Lenssen</a
+                  ><sup>2</sup>
+                </span>
+              </div>
+
+              <div class="is-size-5 publication-authors">
+                <span class="author-block"><sup>1</sup>ETH Zurich</span>
+                <span class="author-block"><sup>2</sup>Max Planck Institute for Informatics</span>
+                <span class="author-block"><sup>3</sup>Google</span>
+              </div>
+              <div class="is-size-5 publication-authors">
+                <span class="author-block">ECCV 2024</span>
+              </div>
+              <div class="column has-text-centered">
+                <div class="publication-links">
+                  <!-- PDF Link. -->
+                  <span class="link-block">
+                    <a
+                      href=""
+                      class="external-link button is-normal is-rounded is-dark"
+                    >
+                      <span class="icon">
+                        <i class="fas fa-file-pdf"></i>
+                      </span>
+                      <span>Paper</span>
+                    </a>
+                  </span>
+                  <span class="link-block">
+                    <a
+                      href="https://github.com/ywyue/FiT3D"
+                      class="external-link button is-normal is-rounded is-dark"
+                    >
+                      <span class="icon">
+                        <i class="fab fa-github"></i>
+                      </span>
+                      <span>Code</span>
+                    </a>
+                  </span>
+                  <span class="link-block">
+                    <a
+                      href="https://huggingface.co/spaces/yuanwenyue/FiT3D"
+                      class="external-link button is-normal is-rounded is-dark"
+                    >
+                      <span>🤗 Demo</span>
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="hero is-light is-small">
+      <div class="hero-body">
+        <div class="container">
+          <div class="carousel-extra-padding">
+            <div id="results-carousel" class="carousel results-carousel">
+              <div class="item item-swing_tire">
+                <video class="carousel-video" id="swing_tire" controls muted loop playsinline height="100%" data-src="https://n.ethz.ch/~yuayue/assets/fit3d/videos/demo_video1.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-tennis">
+                <video class="carousel-video" id="tennis" controls muted loop playsinline height="100%" data-src="https://n.ethz.ch/~yuayue/assets/fit3d/videos/demo_video2.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-libby">
+                <video class="carousel-video" id="libby" controls muted loop playsinline height="100%" data-src="https://n.ethz.ch/~yuayue/assets/fit3d/videos/demo_video3.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-libby">
+                <video class="carousel-video" id="libby" controls muted loop playsinline height="100%" data-src="https://n.ethz.ch/~yuayue/assets/fit3d/videos/demo_video4.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-soapbox">
+                <video class="carousel-video" id="soapbox" controls muted loop playsinline height="100%" data-src="https://n.ethz.ch/~yuayue/assets/fit3d/videos/demo_video5.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-soapbox">
+                <video class="carousel-video" id="soapbox" controls muted loop playsinline height="100%" data-src="https://n.ethz.ch/~yuayue/assets/fit3d/videos/demo_video6.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+      <p style="margin-top: 5px; text-align: center; margin-bottom: -15px;">Feature visualization. We show the PCA features and simple K-Means clustering results.</p>
+      </div>
+    </section>
+
+
+    <section class="section">
+      <div class="container is-max-desktop center">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <img src="assets/teaser.png" style="max-width: 100%" />
+            <div class="content has-text-justified">
+              <p>
+                <b>TL;DR: We propose 3D-aware fine-tuning to improve 2D foundation features.</b> Our method starts with lifting <b>2D image features (e.g. DINOv2) (b)</b> to a 3D representation. Then we finetune the 2D foundation model using the <b>3D-aware features (c)</b>. We demonstrate that incorporating the <b>fine-tuned features (d)</b> results in improved performance on downstream tasks such as semantic segmentation and depth estimation on a variety of datasets with simple linear probing (right). Feature maps are visualized using principal component analysis (PCA).
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container is-max-desktop">
+        <!-- Abstract. -->
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Abstract</h2>
+            <div class="content has-text-justified">
+              <p>
+                Current visual foundation models are trained purely on unstructured 2D data, limiting their understanding of 3D structure of objects and scenes. In this work, we show that fine-tuning on 3D-aware data
+                improves the quality of emerging semantic features. We design a method to lift semantic 2D features into an efficient 3D Gaussian representation, which allows us to re-render them for arbitrary views. Using the rendered 3D-aware features, we design a fine-tuning strategy to transfer such 3D awareness into a 2D foundation model. We demonstrate that models fine-tuned in that way produce features that readily improve downstream task performance in semantic segmentation and depth estimation through simple linear probing. Notably, though fined-tuned on a single indoor dataset, the improvement is transferable to a variety of indoor datasets and out-of-domain datasets. We hope our study encourages the community to consider injecting 3D awareness when training 2D foundation models.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+        <!--/ Abstract. -->
+
+
+    <section class="hero">
+      <div class="container is-max-desktop center">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Method</h2>
+            <img src="assets/method.png" style="max-width: 100%" />
+            <div class="content has-text-justified">
+              <p>
+                We present a two-stage pipeline. In the first stage, we lift 2D foundation features (e.g. DINOv2) into 3D-aware features by training 3D Gaussian representation for each scene. In the second stage, we use the rendered features of multiple scenes to finetune the 2D foundation model.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <br>
+    <br>
+    <section class="hero">
+      <div class="container is-max-desktop center">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Universality</h2>
+            <video controls="" style="width:100%;max-width:100%" autoplay="true" loop="true" playsinline="true"
+              muted="true">
+              <source src="https://n.ethz.ch/~yuayue/assets/fit3d/videos/all_models.mp4" type="video/mp4">Sorry, your browser doesn't
+              support
+              embedded
+              videos.
+            </video>
+            <div class="content has-text-justified">
+              <p>
+                Our 3D-aware fine-tuning is universal and applicable to a variety of 2D vision models, e.g. DINOv2, DINOv2-reg, CLIP, MAE, and DeiT-III.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <br>
+    <br>
+    <section class="hero">
+      <div class="container is-max-desktop center">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Downstream Evaluation</h2>
+            <div class="content has-text-justified">
+              <p>
+                We conduct evaluation on downstream tasks including semantic segmentation and depth estimation with linear probing. The 3D-aware fine-tuning was only conducted on a single indoor dataset ScanNet++. We first evaluate on ScanNet++ validation set then move on to other indoor datasets ScanNet and NYUd. To investigate the generalization ability of the fine-tuned features, we also perform out-of-domain evaluation on generally distributed datasets including ADE20k, Pascal VOC and the outdoor dataset KITTI. Our method brings improvements on all datasets.
+              </p>
+            </div>
+            <img src="assets/results.png" style="max-width: 100%" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="BibTeX">
+      <div class="container is-max-desktop content">
+        <h2 class="title">Citation</h2>
+        <pre><code>@inproceedings{yue2024improving,
+  title     = {{Improving 2D Feature Representations by 3D-Aware Fine-Tuning}},
+  author    = {Yue, Yuanwen and Das, Anurag and Engelmann, Francis and Tang, Siyu and Lenssen, Jan Eric},
+  booktitle = {European Conference on Computer Vision (ECCV)},
+  year      = {2024}
+}</code></pre>
+      </div>
+    </section>
+
+    <section class="section" id="Acknowledgment">
+      <div class="container is-max-desktop content">
+        <h2 class="title">Acknowledgment</h2>
+        Francis Engelmann is partially supported by an ETH AI Center postdoctoral research fellowship and an ETH Zurich Career Seed Award. This project was also partially supported by Saarbrücken Research Center for Visual Computing, Interaction and AI.
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-8">
+            <div class="content" align="center">
+              <p>
+                This website template is adapted from
+                <a href="https://github.com/nerfies/nerfies.github.io"
+                  >nerfies</a
+                >, under a <a href="https://creativecommons.org/licenses/by-sa/4.0/"
+                  >CC BY-SA 4.0 License</a
+                >.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+  <script src="js/jquery-2.1.1.js"></script>
+  <script src="js/jquery.mobile.custom.min.js"></script> <!-- Resource jQuery -->
+  <script src="js/main.js"></script> <!-- Resource jQuery -->
+</html>

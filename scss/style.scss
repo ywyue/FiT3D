@@ -1,0 +1,67 @@
+.cd-image-container {
+	position: relative;
+	width: 90%;
+	max-width: $M; // breakpoints inside partials > _layout.scss
+	margin: 0em auto;
+
+	img {
+		display: block;
+	}
+}
+
+.cd-image-label {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	color: $color-3;
+	padding: 1em;
+	@include font-smoothing;
+	opacity: 0;
+	@include transform(translateY(20px));
+	-webkit-transition: -webkit-transform .3s $bounce-in-duration, opacity .3s $bounce-in-duration;
+	-moz-transition: -moz-transform .3s $bounce-in-duration, opacity .3s $bounce-in-duration;
+	transition: transform .3s $bounce-in-duration, opacity .3s $bounce-in-duration;
+
+	&.is-hidden {
+		visibility: hidden;
+	}
+
+	.is-visible & {
+		opacity: 1;
+		@include transform(translateY(0));
+	}
+}
+
+.cd-resize-img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 0;
+	height: 100%;
+	overflow: hidden;
+	/* Force Hardware Acceleration in WebKit */
+	@include transform(translateZ(0));
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+
+	img {
+		position: absolute;
+		left: 0;
+		top: 0;
+		display: block;
+		height: 100%;
+		width: auto;
+		max-width: none;
+	}
+
+	.cd-image-label {
+		right: auto;
+		left: 0;
+	}
+
+	.is-visible & {
+		width: 50%;
+		/* bounce in animation of the modified image */
+		@include animation(cd-bounce-in $bounce-in-duration);
+	}
+}
