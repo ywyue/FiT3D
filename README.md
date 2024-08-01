@@ -20,6 +20,12 @@
 
 This is the official repository (under construction) for the paper Improving 2D Feature Representations by 3D-Aware Fine-Tuning.
 
+## Changelog
+- [ ] Release ScanNet++ preprocessing code
+- [x] Release feature Gaussian training code
+- [ ] Release fine-tuning code
+- [ ] Release evaluation code
+
 <details open="open" style='padding: 10px; border-radius:5px 30px 30px 5px; border-style: solid; border-width: 1px;'>
   <summary>Table of Contents</summary>
   <ol>
@@ -42,6 +48,7 @@ This is the official repository (under construction) for the paper Improving 2D 
 </details>
 
 
+
 ## Preparation
 
 ### Environment
@@ -57,7 +64,7 @@ This is the official repository (under construction) for the paper Improving 2D 
   ```
 * Compile the feature rasterization modules and the knn module for feature lifting:
   ```shell
-  cd submodules/diff-gaussian-rasterization
+  cd submodules/diff-feature-gaussian-rasterization
   python setup.py install
   cd ../simple-knn/
   python setup.py install
@@ -66,13 +73,54 @@ This is the official repository (under construction) for the paper Improving 2D 
 ### Data
 We train feature Gaussians on ScanNet++ scenes. We follow the [ScanNet++ Toolkit](https://github.com/scannetpp/scannetpp) to undistort the DSLR images with OpenCV and downscale the images by a factor of 2. The processed data should be organized in a structure suitable for training Gaussian Splatting. We follow the ScanNet++ Toolkit to generate depth and 2D semantic segmentation ground truth. We will also release our preprocessing code soon. For all other evaluation datasets (ScanNet, NYUd, NYUv2, ADE20k, Pascal VOC, KITTI), please follow their official websites for downloading instructions.
 
+The ScanNet++ data is expected to be organized as following:
+```
+code_root/
+└── db/
+    └── scannetpp/
+        ├── metadata/
+        └── scenes/
+            ├── 0a5c013435  # scene id
+            ├── ...
+            └── 0a7cc12c0e
+              ├── images  # undistorted and downscaled images
+              ├── masks # undistorted and downscaled anonymized masks
+              ├── points3D.txt  # 3D feature points used by COLMAP
+              └── transforms_train.json # camera poses in the format used by Nerfstudio
+```
+
+
 ## Demo
 We provide a hugging face [demo](https://huggingface.co/spaces/yuanwenyue/FiT3D) where one can upload their own images and visualize the feature maps of the original 2D model and our fine-tuned model.
 
 ## Training
 ### Stage I: Lifting Features to 3D
 
-### Stage II: 3D-Aware Fine-Tuning
+Example command to train the feature Gaussians for a single scene: 
+```shell
+python train_feat_gaussian.py --run_name=example_feature_gaussian_training \
+                    --model_name=dinov2_small \
+                    --source_path=db/scannetpp/scenes/0a5c013435 \
+                    --low_sem_dim=64
+```
+```model_name``` indicates the 2D feature extractor and can be selected from ```dinov2_small```, ```dinov2_reg_small```, ```clip_base```, ```mae_base```, ```deit3_base```. ```low_sem_dim``` is the dimension of the semantic feature vector attached to each Gaussian. Note it should have the same value with ```NUM_CHANNELS_FEAT``` in ```submodules/diff-feature-gaussian-rasterization/cuda_rasterizer/config.h```.
+
+To generate the commands for training Gaussians for all scenes in ScanNet++, run:
+```shell
+python gen_commands.py --train_fgs_commands_folder=train_fgs_commands --model_name=dinov2_small --low_sem_dim=64
+```
+Training commands for all scenes will be stored in ```train_fgs_commands```.
+
+After training, we need to write the parameters of all feature Gaussians to a single file, which will be used in the 2nd stage. To do that, run:
+```shell
+python write_feat_gaussian.py
+```
+After that, all the pretrained Gaussians of training scenes are stored as ```pretrained_feat_gaussians_train.pth``` and all the pretrained Gaussians of validation scenes are stored as ```pretrained_feat_gaussians_val.pth```. Both files will be stored in ```db/scannetpp/metadata```.
+
+
+
+
+### Stage II: Fine-Tuning
 
 ## Evaluation
 
@@ -87,4 +135,3 @@ If you find our code or paper useful, please cite:
   year      = {2024}
 }
 ```
-
