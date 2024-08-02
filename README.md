@@ -12,6 +12,9 @@
 
 ### [Project Page](https://ywyue.github.io/FiT3D) | [Paper](http://arxiv.org/abs/2407.20229) 
 
+<a target="_blank" href="https://colab.research.google.com/github/ywyue/FiT3D/blob/main/FiT3D_demo.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
 <a href="https://huggingface.co/spaces/yuanwenyue/FiT3D">
   <img alt="Spaces" src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue">
 </a>
@@ -21,6 +24,7 @@
 This is the official repository (under construction) for the paper Improving 2D Feature Representations by 3D-Aware Fine-Tuning.
 
 ## Changelog
+- [x] Add Colab Notebook and Hugging Face demo
 - [ ] Release ScanNet++ preprocessing code
 - [x] Release feature Gaussian training code
 - [ ] Release fine-tuning code
@@ -30,10 +34,10 @@ This is the official repository (under construction) for the paper Improving 2D 
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#preparation">Preparation</a>
+      <a href="#demo">Demo</a>
     </li>
     <li>
-      <a href="#demo">Demo</a>
+      <a href="#preparation">Preparation</a>
     </li>
     <li>
       <a href="#training">Training</a>
@@ -47,6 +51,9 @@ This is the official repository (under construction) for the paper Improving 2D 
   </ol>
 </details>
 
+## Demo
+We provide a [Colab Notebook](https://colab.research.google.com/github/ywyue/FiT3D/blob/main/FiT3D_demo.ipynb) with step-by-step guides to make inference and visualize the PCA features and K-Means clustering of original 2D models and our fine-tuned models.
+We also provide a [Hugging Face demo 🤗](https://huggingface.co/spaces/yuanwenyue/FiT3D) where users can upload their own images and check the visualizations online.
 
 
 ## Preparation
@@ -88,10 +95,6 @@ code_root/
               ├── points3D.txt  # 3D feature points used by COLMAP
               └── transforms_train.json # camera poses in the format used by Nerfstudio
 ```
-
-
-## Demo
-We provide a hugging face [demo](https://huggingface.co/spaces/yuanwenyue/FiT3D) where one can upload their own images and visualize the feature maps of the original 2D model and our fine-tuned model.
 
 ## Training
 ### Stage I: Lifting Features to 3D
