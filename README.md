@@ -25,7 +25,7 @@ This is the official repository (under construction) for the paper Improving 2D 
 
 ## Changelog
 - [x] Add Colab Notebook and Hugging Face demo
-- [ ] Release ScanNet++ preprocessing code
+- [x] Release ScanNet++ preprocessing code
 - [x] Release feature Gaussian training code
 - [ ] Release fine-tuning code
 - [ ] Release evaluation code
@@ -78,14 +78,16 @@ We also provide a [Hugging Face demo 🤗](https://huggingface.co/spaces/yuanwen
   ```
 
 ### Data
-We train feature Gaussians on ScanNet++ scenes. We follow the [ScanNet++ Toolkit](https://github.com/scannetpp/scannetpp) to undistort the DSLR images with OpenCV and downscale the images by a factor of 2. The processed data should be organized in a structure suitable for training Gaussian Splatting. We follow the ScanNet++ Toolkit to generate depth and 2D semantic segmentation ground truth. We will also release our preprocessing code soon. For all other evaluation datasets (ScanNet, NYUd, NYUv2, ADE20k, Pascal VOC, KITTI), please follow their official websites for downloading instructions.
-
-The ScanNet++ data is expected to be organized as following:
+We train feature Gaussians and fine-tuning on ScanNet++ scenes. Preprocessing code and instructions are [here](https://github.com/ywyue/FiT3D/tree/main/scannetpp_preprocess). After preprocessing, the ScanNet++ data is expected to be organized as following:
 ```
-code_root/
+FiT3D/
 └── db/
     └── scannetpp/
         ├── metadata/
+        |    ├── nvs_sem_train.txt  # Training set for NVS and semantic tasks with 230 scenes
+        |    ├── nvs_sem_val.txt # Validation set for NVS and semantic tasks with 50 scenes
+        |    ├── train_samples.txt  # Training sample list, formatted as sceneID_imageID
+        |    └── val_samples.txt # Validation sample list, formatted as sceneID_imageID
         └── scenes/
             ├── 0a5c013435  # scene id
             ├── ...
@@ -95,6 +97,8 @@ code_root/
               ├── points3D.txt  # 3D feature points used by COLMAP
               └── transforms_train.json # camera poses in the format used by Nerfstudio
 ```
+
+For all other evaluation datasets (ScanNet, NYUd, NYUv2, ADE20k, Pascal VOC, KITTI), please follow their official websites for downloading instructions.
 
 ## Training
 ### Stage I: Lifting Features to 3D
