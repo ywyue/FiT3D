@@ -1,7 +1,6 @@
 ############################################################
 # Code for FiT3D 
 # by Yuanwen Yue
-# Stage 1: Lifting 2D features to feature Gaussians
 ############################################################
 # Code was modified from Gaussian Splatting codebase
 # https://github.com/graphdeco-inria/gaussian-splatting
@@ -100,3 +99,58 @@ def render(viewpoint_camera, pc : GaussianModel, pipe, bg_color : torch.Tensor, 
             "viewspace_points": screenspace_points,
             "visibility_filter" : radii > 0,
             "radii": radii}
+
+
+def render_fine(FoVx, FoVy, image_height, image_width, world_view_transform, full_proj_transform,
+           camera_center, means3D, shs, sem, opacity, scales, rotations, bg_color : torch.Tensor, 
+           scaling_modifier = 1.0, override_color = None):
+    """
+    Render the scene. 
+    
+    function with modified signature used when fine-tuning
+    """
+ 
+    screenspace_points = torch.zeros_like(means3D, dtype=means3D.dtype, requires_grad=False, device="cuda") + 0
+    try:
+        screenspace_points.retain_grad()
+    except:
+        pass
+
+    # Set up rasterization configuration
+    tanfovx = math.tan(FoVx * 0.5)
+    tanfovy = math.tan(FoVy * 0.5)
+
+    raster_settings = GaussianRasterizationSettings(
+        image_height=int(image_height),
+        image_width=int(image_width),
+        tanfovx=tanfovx,
+        tanfovy=tanfovy,
+        bg=bg_color,
+        scale_modifier=scaling_modifier,
+        viewmatrix=world_view_transform,
+        projmatrix=full_proj_transform,
+        sh_degree=3,
+        campos=camera_center,
+        prefiltered=False,
+        debug=False
+    )
+
+    rasterizer = GaussianRasterizer(raster_settings=raster_settings)
+
+    means2D = screenspace_points 
+    
+    rendered_image, rendered_featmap, _ = rasterizer(
+        means3D = means3D,
+        means2D = means2D,
+        shs = shs,
+        colors_precomp = None,
+        sem = sem,
+        opacities = opacity,
+        scales = scales,
+        rotations = rotations,
+        cov3D_precomp = None) 
+
+    return {
+            "render": rendered_image,
+            "render_featmap": rendered_featmap,
+            }

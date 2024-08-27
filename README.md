@@ -27,7 +27,7 @@ This is the official repository (under construction) for the paper Improving 2D 
 - [x] Add Colab Notebook and Hugging Face demo
 - [x] Release ScanNet++ preprocessing code
 - [x] Release feature Gaussian training code
-- [ ] Release fine-tuning code
+- [x] Release fine-tuning code
 - [ ] Release evaluation code
 
 <details open="open" style='padding: 10px; border-radius:5px 30px 30px 5px; border-style: solid; border-width: 1px;'>
@@ -124,10 +124,18 @@ python write_feat_gaussian.py
 ```
 After that, all the pretrained Gaussians of training scenes are stored as ```pretrained_feat_gaussians_train.pth``` and all the pretrained Gaussians of validation scenes are stored as ```pretrained_feat_gaussians_val.pth```. Both files will be stored in ```db/scannetpp/metadata```.
 
-
-
-
 ### Stage II: Fine-Tuning
+
+In this stage, we use the pretrained Gaussians to render features and use those features as target to finetune the 2D feature extractor. To do that, run
+```shell
+python finetune.py --model_name=dinov2_small \
+                   --output_dir=output_finemodel \
+                   --job_name=finetuning_dinov2_small \
+                   --train_gaussian_list=db/scannetpp/metadata/pretrained_feat_gaussians_train.pth \
+                   --val_gaussian_list=db/scannetpp/metadata/pretrained_feat_gaussians_val.pth
+
+```
+```model_name``` indicates the 2D feature extractor and should be consistent with the feature extractor used in the first stage. The default fine-tuning epoch is 1, after which the weights of the finetuned model will be saved in ```output_dir/date_job_name```.
 
 ## Evaluation
 

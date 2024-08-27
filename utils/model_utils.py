@@ -158,3 +158,25 @@ def forward_2d_model(image, feature_extractor):
     # featmap = features.reshape(fmap_height, fmap_width, features.shape[-1]).permute((2,0,1)).unsqueeze(0)
 
     return featmap
+
+
+def forward_2d_model_batch(images, feature_extractor):
+
+    B, _, height, width = images.shape
+    
+    stride = feature_extractor.patch_embed.patch_size[0]
+    width_int = (width // stride)*stride
+    height_int = (height // stride)*stride
+
+    batch = torch.nn.functional.interpolate(images, size=(height_int, width_int), mode='bilinear')
+
+    featmap = feature_extractor.get_intermediate_layers(
+                    batch,
+                    n=[len(feature_extractor.blocks)-1],
+                    reshape=True,
+                    return_prefix_tokens=False,
+                    return_class_token=False,
+                    norm=True,
+                )[-1]
+
+    return featmap
