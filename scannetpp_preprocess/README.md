@@ -6,7 +6,7 @@ The code here is largely built on top of [ScanNet++ Toolkit](https://github.com/
 
 Submit the application and download the data from ScanNet++ [official website](https://kaldir.vc.in.tum.de/scannetpp/). After your application got approved, you will have access to their download script. Please set ```default_assets``` in ```download_scannetpp.yml``` as ```[dslr_train_test_lists_path, dslr_resized_dir, dslr_resized_mask_dir, dslr_colmap_dir, dslr_nerfstudio_transform_path, scan_mesh_path, scan_mesh_mask_path, scan_mesh_segs_path, scan_anno_json_path, scan_sem_mesh_path]```.
 
-### Step 2: Downscale and undistort
+### Step 2: Downscale & undistort & write metadata
 
 * Create an environment for data preprocessing and install required packages:
   ```shell
@@ -30,6 +30,11 @@ Submit the application and download the data from ScanNet++ [official website](h
   ```shell
   python gen_sample_list.py
   ```
+* Pre-compute projection matrices for all training and validation samples and save them to speed up the fine-tuning stage. 
+  ```shell
+  python write_viewinfo.py
+  ```
+
 
 After this point, the data should be organized as follows correctly:
 ```
@@ -40,7 +45,9 @@ FiT3D/
         |    ├── nvs_sem_train.txt  # Training set for NVS and semantic tasks with 230 scenes
         |    ├── nvs_sem_val.txt # Validation set for NVS and semantic tasks with 50 scenes
         |    ├── train_samples.txt  # Training sample list, formatted as sceneID_imageID
-        |    └── val_samples.txt # Validation sample list, formatted as sceneID_imageID
+        |    ├── val_samples.txt # Validation sample list, formatted as sceneID_imageID
+        |    ├── train_view_info.npy  # Training sample camera info, e.g. projection matrices
+        |    └── val_view_info.npy # Validation sample camera info, e.g. projection matrices
         └── scenes/
             ├── 0a5c013435  # scene id
             ├── ...
