@@ -87,7 +87,9 @@ FiT3D/
         |    ├── nvs_sem_train.txt  # Training set for NVS and semantic tasks with 230 scenes
         |    ├── nvs_sem_val.txt # Validation set for NVS and semantic tasks with 50 scenes
         |    ├── train_samples.txt  # Training sample list, formatted as sceneID_imageID
-        |    └── val_samples.txt # Validation sample list, formatted as sceneID_imageID
+        |    ├── val_samples.txt # Validation sample list, formatted as sceneID_imageID
+        |    ├── train_view_info.npy  # Training sample camera info, e.g. projection matrices
+        |    └── val_view_info.npy # Validation sample camera info, e.g. projection matrices
         └── scenes/
             ├── 0a5c013435  # scene id
             ├── ...
