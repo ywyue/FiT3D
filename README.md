@@ -2,10 +2,10 @@
 ### ECCV 2024
 
 [Yuanwen Yue](https://n.ethz.ch/~yuayue/) <sup>1</sup>,
-[Anurag Das](https://www.mpi-inf.mpg.de/departments/computer-vision-and-machine-learning/people/anurag-das/) <sup>2</sup>,
+[Anurag Das](https://anurag-198.github.io/) <sup>2</sup>,
 [Francis Engelmann](https://francisengelmann.github.io/) <sup>1,3</sup>,
 [Siyu Tang](https://vlg.inf.ethz.ch/team/Prof-Dr-Siyu-Tang.html) <sup>1</sup>,
-[Jan Eric Lenssen](https://geometric-rl.mpi-inf.mpg.de/people/lenssen.html) <sup>2</sup>
+[Jan Eric Lenssen](https://janericlenssen.github.io/) <sup>2</sup>
 <br>
 
 **<sup>1</sup>ETH Zurich, <sup>2</sup>Max Planck Institute for Informatics, <sup>3</sup>Google**
@@ -53,7 +53,10 @@ This is the official repository (under construction) for the paper Improving 2D 
 
 ## Demo
 We provide a [Colab Notebook](https://colab.research.google.com/github/ywyue/FiT3D/blob/main/FiT3D_demo.ipynb) with step-by-step guides to make inference and visualize the PCA features and K-Means clustering of original 2D models and our fine-tuned models.
-We also provide a [Hugging Face demo 🤗](https://huggingface.co/spaces/yuanwenyue/FiT3D) where users can upload their own images and check the visualizations online.
+We also provide an online [Hugging Face demo 🤗](https://huggingface.co/spaces/yuanwenyue/FiT3D) where users can upload their own images and check the visualizations online. Alternatively, to run the demo locally, just try ```python app.py```.
+
+<img width="1100" src="./assets/demo.gif" />
+
 
 
 ## Preparation
