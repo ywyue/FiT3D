@@ -24,7 +24,12 @@ def main(args):
     shutil.move(os.path.join(data_root, "splits", "nvs_sem_val.txt"), metadata_root)
 
 
-    all_scenes = os.listdir(os.path.join(data_root, "data"))
+    with open(os.path.join(metadata_root, "nvs_sem_train.txt")) as f:
+        train_scenes = f.read().splitlines()
+    with open(os.path.join(metadata_root, "nvs_sem_val.txt")) as f:
+        val_scenes = f.read().splitlines()
+    all_scenes = train_scenes + val_scenes
+
     for scene in tqdm(all_scenes):
         
         scene_folder = os.path.join(data_root, "data", scene)
