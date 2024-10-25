@@ -201,7 +201,8 @@ if __name__ == "__main__":
                                                                     NOTE: need to change NUM_CHANNELS_FEAT accordingly \
                                                                     in submodules/diff-gaussian-rasterization/cuda_rasterizer/config.h")
     parser.add_argument("--run_name", default='exp', type=str)
-    parser.add_argument("--model_name", default='dinov2_small', type=str)
+    parser.add_argument("--model_name", default='dinov2_small', type=str, help='2D feature extractor. Select from \
+                                        dinov2_small, dinov2_base, dinov2_reg_small, clip_base, mae_base, deit3_base')
     args = parser.parse_args(sys.argv[1:])
     args.save_iterations.append(args.iterations)
     

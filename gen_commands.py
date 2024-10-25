@@ -9,7 +9,7 @@ def config():
     a.add_argument('--train_fgs_commands_folder', default='train_fgs_commands', type=str, \
                   help='folder to store commands for training feature Gaussians')
     a.add_argument('--model_name', default='dinov2_small', type=str, \
-                  help='2D feature extractor name, select from dinov2_small, dinov2_reg_small, clip_base \
+                  help='2D feature extractor name, select from dinov2_small, dinov2_base, dinov2_reg_small, clip_base \
                        mae_base, deit3_base')
     a.add_argument('--low_sem_dim', default=64, type=str, \
                   help='low semantic feature dimension for each Gaussian')

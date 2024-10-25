@@ -21,6 +21,7 @@ ADE_STD = np.array([58.395, 57.120, 57.375]) / 255
 
 timm_model_card = {
     "dinov2_small": "vit_small_patch14_dinov2.lvd142m",
+    "dinov2_base": "vit_base_patch14_dinov2.lvd142m",
     "dinov2_reg_small": "vit_small_patch14_reg4_dinov2.lvd142m",
     "clip_base": "vit_base_patch16_clip_384.laion2b_ft_in12k_in1k",
     "mae_base": "vit_base_patch16_224.mae",

@@ -115,7 +115,7 @@ python train_feat_gaussian.py --run_name=example_feature_gaussian_training \
                     --source_path=db/scannetpp/scenes/0a5c013435 \
                     --low_sem_dim=64
 ```
-```model_name``` indicates the 2D feature extractor and can be selected from ```dinov2_small```, ```dinov2_reg_small```, ```clip_base```, ```mae_base```, ```deit3_base```. ```low_sem_dim``` is the dimension of the semantic feature vector attached to each Gaussian. Note it should have the same value with ```NUM_CHANNELS_FEAT``` in ```submodules/diff-feature-gaussian-rasterization/cuda_rasterizer/config.h```.
+```model_name``` indicates the 2D feature extractor and can be selected from ```dinov2_small```, ```dinov2_base```, ```dinov2_reg_small```, ```clip_base```, ```mae_base```, ```deit3_base```. ```low_sem_dim``` is the dimension of the semantic feature vector attached to each Gaussian. Note it should have the same value with ```NUM_CHANNELS_FEAT``` in ```submodules/diff-feature-gaussian-rasterization/cuda_rasterizer/config.h```.
 
 To generate the commands for training Gaussians for all scenes in ScanNet++, run:
 ```shell

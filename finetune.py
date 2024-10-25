@@ -36,7 +36,7 @@ def get_args_parser():
 
 
     parser.add_argument("--model_name", default='dinov2_small', type=str, help='2D feature extractor. Select from \
-                                        dinov2_small, dinov2_reg_small, clip_base, mae_base, deit3_base')
+                                        dinov2_small, dinov2_base, dinov2_reg_small, clip_base, mae_base, deit3_base')
     parser.add_argument('--output_dir', default='output_finemodel',
                         help='path where to save, empty for no saving')
     parser.add_argument('--device', default='cuda',

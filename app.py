@@ -218,7 +218,7 @@ if __name__ == "__main__":
                         )
     
     timm_model_card = {
-        "DINOv2": "vit_small_patch14_dinov2.lvd142m",
+        "DINOv2": "vit_small_patch14_dinov2.lvd142m", # default is small, for base change to "vit_base_patch14_dinov2.lvd142m"
         "DINOv2-reg": "vit_small_patch14_reg4_dinov2.lvd142m",
         "CLIP": "vit_base_patch16_clip_384.laion2b_ft_in12k_in1k",
         "MAE": "vit_base_patch16_224.mae",
@@ -226,7 +226,7 @@ if __name__ == "__main__":
     }
     
     our_model_card = {
-        "DINOv2": "dinov2_small_fine",
+        "DINOv2": "dinov2_small_fine", # default is small, for base change to "dinov2_base_fine"
         "DINOv2-reg": "dinov2_reg_small_fine",
         "CLIP": "clip_base_fine",
         "MAE": "mae_base_fine",
