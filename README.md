@@ -1,7 +1,7 @@
 # Improving 2D Feature Representations by 3D-Aware Fine-Tuning
 ### ECCV 2024
 
-[Yuanwen Yue](https://n.ethz.ch/~yuayue/) <sup>1</sup>,
+[Yuanwen Yue](https://ywyue.github.io/) <sup>1</sup>,
 [Anurag Das](https://anurag-198.github.io/) <sup>2</sup>,
 [Francis Engelmann](https://francisengelmann.github.io/) <sup>1,3</sup>,
 [Siyu Tang](https://vlg.inf.ethz.ch/team/Prof-Dr-Siyu-Tang.html) <sup>1</sup>,
@@ -21,14 +21,14 @@
 
 <img width="1100" src="./assets/teaser.png" />
 
-This is the official repository (under construction) for the paper Improving 2D Feature Representations by 3D-Aware Fine-Tuning.
+This is the official repository for the paper Improving 2D Feature Representations by 3D-Aware Fine-Tuning.
 
 ## Changelog
 - [x] Add Colab Notebook and Hugging Face demo
 - [x] Release ScanNet++ preprocessing code
 - [x] Release feature Gaussian training code
 - [x] Release fine-tuning code
-- [ ] Release evaluation code
+- [x] Release evaluation code
 
 <details open="open" style='padding: 10px; border-radius:5px 30px 30px 5px; border-style: solid; border-width: 1px;'>
   <summary>Table of Contents</summary>
@@ -78,6 +78,13 @@ We also provide an online [Hugging Face demo 🤗](https://huggingface.co/spaces
   python setup.py install
   cd ../simple-knn/
   python setup.py install
+  ```
+* Install ```mmcv``` and ```mmsegmentation```, required for downstream evaluation. Note we modifed the source code so please build them from source as follows:
+  ```shell
+  cd mmcv
+  MMCV_WITH_OPS=1 pip install -e . -v
+  cd ../mmsegmentation
+  pip install -e . -v
   ```
 
 ### Data
@@ -143,6 +150,31 @@ python finetune.py --model_name=dinov2_small \
 ```model_name``` indicates the 2D feature extractor and should be consistent with the feature extractor used in the first stage. The default fine-tuning epoch is 1, after which the weights of the finetuned model will be saved in ```output_dir/date_job_name```.
 
 ## Evaluation
+
+For visual comparison of PCA features and K-means clustering results, please check our [Colab Notebook](https://colab.research.google.com/github/ywyue/FiT3D/blob/main/FiT3D_demo.ipynb) and demo ```app.py```.
+
+For quantitative evaluation on downstream tasks, we conduct linear probing evaluation on semantic segmentation and depth estimation.
+
+* First, download all evaluation dataset and put them in ```eval_data``` as follows:
+  ```
+  eval_data/
+  ├── scannetpp # semantic segmentation and depth estimation
+  ├── scannet # semantic segmentation and depth estimation
+  ├── nyu # depth estimation
+  ├── nyuv2 # semantic segmentation
+  ├── kitti # depth estimation
+  ├── ADEChallengeData2016 # semantic segmentation
+  ├── VOC2012 # semantic segmentation
+  └── kitti # depth estimation
+  ```
+
+Processed scannetpp dataset with annotations can be downloaded from [here](https://drive.google.com/file/d/18BGnCzk51nv79M-SiJ6ezX2WOTcQDZyi/view?usp=sharing). For other datasets, please download from their official websites and their annotations are already provided so no (or only little) preprocessing needed.
+
+* Launch the linear probing evaluation. We provide two example scripts: ```eval_scripts/fit3d/linear_eval_sem.sh``` for semantic segmentation and ```eval_scripts/fit3d/linear_eval_depth.sh``` for depth estimation. Note:
+  * Change  ```model``` and ```dataset``` to adapt the script for evaluation with different models and datasets. See comments in the script.
+  * The default linear probing evaluation requires **8 GPUs** for **40K** iterations for semantic segmentation and **38400** iterations for depth estimation. If you use fewer GPUs then the number of iterations needs to be linearly increased. For example, if ```ngpu``` is set as **4**, then **80K** iterations are required for semantic segmentation (76800 iterations for depth estimation). The number of iterations (parameter called ```max_iters```) can be modified from respective ```config``` files.
+
+* To evaluate baseline models (i.e. original 2D models), see ```eval_scripts/baseline/linear_eval_sem.sh``` and ```eval_scripts/baseline/linear_eval_depth.sh```
 
 ## Citation
 

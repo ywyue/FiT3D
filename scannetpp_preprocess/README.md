@@ -61,4 +61,6 @@ FiT3D/
 
 Note this step is not required for training feature Gaussians (Stage 1) or fine-tuning (Stage 2). This step is only needed when we perform linear probing evaluation on ScanNet++. 
 
-[Coming soon]
+We follow [ScanNet++ Toolkit](https://github.com/scannetpp/scannetpp) to generate 2D semantic and depth label by rendering 3D mesh.
+
+Processed scannetpp dataset with annotations to be used for linear probing can be downloaded from [here](https://drive.google.com/file/d/18BGnCzk51nv79M-SiJ6ezX2WOTcQDZyi/view?usp=sharing).
