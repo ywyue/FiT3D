@@ -1,6 +1,11 @@
 ## Data preprocessing for ScanNet++
-The code here is largely built on top of [ScanNet++ Toolkit](https://github.com/scannetpp/scannetpp). We downscale the DSLR images by a factor of 2 and undistort them using OpenCV. To prepare data for linear probing evaluation on ScanNet++, we render depth and 2D semantic segmentation from 3D mesh. Note only step 1 and step 2 are required for training feature Gaussians and fine-tuning. 
 
+**Note:** *each new user needs to submit application to request access to ScanNet++ from its official website [official website](https://kaldir.vc.in.tum.de/scannetpp/).* According to the Terms of Use of ScanNet++, we can only share the preprocessed data with people who have also signed the Terms of Use and been granted access to ScanNet++. After you submit your application and get approved from the ScanNet++ team, you can either:
+
+* Forward the approval email to yuayue@ethz.ch and then we will share our preprocessed data with you directly.
+* Or follow the data preprocessing instructions as follows to prepare the data yourself.
+
+The code here is largely built on top of [ScanNet++ Toolkit](https://github.com/scannetpp/scannetpp). We downscale the DSLR images by a factor of 2 and undistort them using OpenCV. To prepare data for linear probing evaluation on ScanNet++, we render depth and 2D semantic segmentation from 3D mesh. Note only step 1 and step 2 are required for training feature Gaussians and fine-tuning. 
 
 ### Step 1: Download raw dataset
 
