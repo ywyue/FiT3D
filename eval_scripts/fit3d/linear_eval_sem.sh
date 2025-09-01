@@ -1,7 +1,7 @@
 #!/bin/bash
 
 model="dinov2_small" # ["dinov2_small", "dinov2_base", "dinov2_reg_small", "clip_base", "mae_base", "deit3_base"]
-ngpu=4
+ngpu=8
 dataset="scannetpp" # ["scannetpp", "scannet", "nyu", "ade20k", "voc2012"]
 if [[ $model == *"small"* ]]; then
     vit="vits"

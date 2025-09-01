@@ -8,8 +8,8 @@ if [[ $model == *"small"* ]]; then
 elif [[ $model == *"base"* ]]; then
     vit="vitb"
 fi
-config="evaluation/baseline_configs/${vit}_${dataset}_depth_linear_config.py"
-workdir="work_dirs/baseline_depth_eval/${dataset}/${model}"
+config="evaluation/configs/${vit}_${dataset}_depth_linear_config.py"
+workdir="work_dirs/depth_eval/${dataset}/${model}"
 bash evaluation/scripts/dist_eval_depth.sh \
     ${config} ${ngpu} \
     --backbone-type $model \
