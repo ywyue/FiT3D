@@ -184,11 +184,11 @@ if __name__ == "__main__":
     print(device)
 
     example_urls = {
-        "library.jpg": "https://n.ethz.ch/~yuayue/assets/fit3d/demo_images/library.jpg",
-        "livingroom.jpg": "https://n.ethz.ch/~yuayue/assets/fit3d/demo_images/livingroom.jpg",
-        "airplane.jpg": "https://n.ethz.ch/~yuayue/assets/fit3d/demo_images/airplane.jpg",
-        "ship.jpg": "https://n.ethz.ch/~yuayue/assets/fit3d/demo_images/ship.jpg",
-        "chair.jpg": "https://n.ethz.ch/~yuayue/assets/fit3d/demo_images/chair.jpg",
+        "library.jpg": "https://ywyue.github.io/assets/fit3d/demo_images/library.jpg",
+        "livingroom.jpg": "https://ywyue.github.io/assets/fit3d/demo_images/livingroom.jpg",
+        "airplane.jpg": "https://ywyue.github.io/assets/fit3d/demo_images/airplane.jpg",
+        "ship.jpg": "https://ywyue.github.io/assets/fit3d/demo_images/ship.jpg",
+        "chair.jpg": "https://ywyue.github.io/assets/fit3d/demo_images/chair.jpg",
     }
 
     example_dir = "/tmp/examples"
